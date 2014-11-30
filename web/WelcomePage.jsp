@@ -1,6 +1,6 @@
 <%-- 
-    Document   : userLogin
-    Created on : 30-Nov-2014, 12:58:19
+    Document   : WelcomePage
+    Created on : 30-Nov-2014, 14:29:51
     Author     : hiteshkhapre
 --%>
 
@@ -9,8 +9,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login Page</title>
-        <style type="text/css">
+        <title>Welcome to ABC Bank</title>
+                <style type="text/css">
     .title {
         color: blue;
         text-decoration: bold;
@@ -232,16 +232,14 @@ body {
 
 
     </style>
+      
     </head>
     <body>
-        <h1 align="center">Welcome to ABC Bank</h1>
-        
-<body>
-    
-    <div class="container">
+        <h1 align="center">Hello <%=session.getAttribute("User")%></h1>
+         <div class="container">
   <div class="login">
     <h1>Login</h1>
-    <form method="post" action="login">
+    <form method="post" action="">
       <p><input type="text" name="login" value="" placeholder="Username or Email"></p>
       <p><input type="password" name="password" value="" placeholder="Password"></p>
       <p class="remember_me">
@@ -261,7 +259,5 @@ body {
   </div>
 </div>
     
-
-    
-</body>
+    </body>
 </html>
