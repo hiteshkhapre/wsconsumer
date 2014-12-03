@@ -1,6 +1,6 @@
 <%-- 
-    Document   : WelcomePage
-    Created on : 30-Nov-2014, 14:29:51
+    Document   : customerRegistration
+    Created on : 03-Dec-2014, 10:52:03
     Author     : hiteshkhapre
 --%>
 
@@ -235,27 +235,31 @@ body {
       
     </head>
     <body>
-        <h1 align="center">Hello <%=session.getAttribute("User")%></h1>
-        
-  
-        
-         <div id="container">
-            <form>
-                <h1>Create Logon</h1>
-                <div class="line"><label for="username">Username *: </label><input type="text" id="username" /></div>
-                <div class="line"><label for="pwd">Password *: </label><input type="password" id="pwd" /></div>
-                <!-- You may want to consider adding a "confirm" password box also -->
-                <div class="line"><label for="surname">Surname *: </label><input type="text" id="surname" /></div>
-                <div class="line"><label for="other_names">Other Names *: </label><input type="text" id="names" /></div>
-                <div class="line"><label for="dob">Date of Birth *: </label><input type="text" id="dob" /></div>
-                <div class="line"><label for="email">Email *: </label><input type="email" id="email" /></div>
-                <div class="line"><label for="tel">Telephone: </label><input type="text" id="tel" /></div>
-                <div class="line"><label for="add">Address *: </label><input type="text" id="add" /></div>
-                <div class="line"><label for="ptc">Post Code *: </label><input type="text" id="ptc" /></div>
-                <div class="line submit"><input type="submit" value="Submit" /></div>
- 
-                <p>Note: Please make sure your details are correct before submitting form and that all fields marked with * are completed!.</p>
-            </form>
-        </div>
+<div id="heading">
+<h1 style="border: 1px solid rgb(204, 204, 204); padding: 5px 10px; text-align: center; background: rgb(238, 238, 238);">ABC ABC</h1>
+</div>
+
+<div id="container" style="background:#eee;border:1px solid #ccc;padding:5px 10px;">
+<p style="text-align: center;">Create Logon</p>
+</div>
+
+<p style="text-align: center;">&nbsp;</p>
+
+<form id="registration" method="post" name="registration">
+<p style="text-align: center;">Username :&nbsp;<input maxlength="50" name="username" size="50" type="text" /></p>
+
+<p style="text-align: center;">Password :&nbsp;<input maxlength="50" name="password" size="50" type="password" /></p>
+
+<p style="text-align: center;">First Name :&nbsp;<input maxlength="50" name="firstname" size="50" type="text" /></p>
+
+<p style="text-align: center;">Surname :&nbsp;<input maxlength="50" name="surname" size="50" type="text" /></p>
+
+<p style="text-align: center;">Email :&nbsp;<input maxlength="50" name="email" size="50" type="text" /></p>
+
+<p style="text-align: center;"><input name="submit" type="submit" value="Register" /></p>
+</form>
+
+<p>&nbsp;</p>
+       
     </body>
 </html>
