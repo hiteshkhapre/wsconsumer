@@ -4,22 +4,6 @@
 
 <xs:element name="getPasswordResponse" type="tns:getPasswordResponse"/>
 
-<xs:element name="getTypeofUser" type="tns:getTypeofUser"/>
-
-<xs:element name="getTypeofUserResponse" type="tns:getTypeofUserResponse"/>
-
-<xs:complexType name="getTypeofUser">
-<xs:sequence>
-<xs:element name="username" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="getTypeofUserResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="getPassword">
 <xs:sequence>
 <xs:element name="username" type="xs:string" minOccurs="0"/>

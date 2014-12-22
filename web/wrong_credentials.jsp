@@ -1,6 +1,6 @@
 <%-- 
-    Document   : WelcomePage
-    Created on : 30-Nov-2014, 14:29:51
+    Document   : userLogin
+    Created on : 30-Nov-2014, 12:58:19
     Author     : hiteshkhapre
 --%>
 
@@ -9,8 +9,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Welcome to ABC Bank</title>
-                <style type="text/css">
+        <title>Login Page</title>
+        <style type="text/css">
     .title {
         color: blue;
         text-decoration: bold;
@@ -36,13 +36,13 @@
 .login-help {
   margin: 20px 0;
   font-size: 11px;
-  color: white;
+  color: black;
   text-align: center;
   text-shadow: 0 1px #2a85a1;
 }
  
 .login-help a {
-  color: #cce7fa;
+  color: black;
   text-decoration: none;
 }
  
@@ -104,7 +104,7 @@
  
 .login p.remember_me label {
   font-size: 12px;
-  color: #777;
+  color: coral;
   cursor: pointer;
 }
  
@@ -226,36 +226,18 @@ color: #444;
 
 body {
   font: 13px/20px "Lucida Grande", Tahoma, Verdana, sans-serif;
-  color: #404040;
-  background: #0ca3d2;
+  color: inherit;
+  background: #ccc;
 }
 
 
     </style>
-      
     </head>
     <body>
-        <h1 align="center">Hello <%=session.getAttribute("User")%></h1>
+        <h1 align="center">Welcome to ABC Bank</h1>
         
-  
         
-         <div id="container">
-            <form>
-                <h1>Create Logon</h1>
-                <div class="line"><label for="username">Username *: </label><input type="text" id="username" /></div>
-                <div class="line"><label for="pwd">Password *: </label><input type="password" id="pwd" /></div>
-                <!-- You may want to consider adding a "confirm" password box also -->
-                <div class="line"><label for="surname">Surname *: </label><input type="text" id="surname" /></div>
-                <div class="line"><label for="other_names">Other Names *: </label><input type="text" id="names" /></div>
-                <div class="line"><label for="dob">Date of Birth *: </label><input type="text" id="dob" /></div>
-                <div class="line"><label for="email">Email *: </label><input type="email" id="email" /></div>
-                <div class="line"><label for="tel">Telephone: </label><input type="text" id="tel" /></div>
-                <div class="line"><label for="add">Address *: </label><input type="text" id="add" /></div>
-                <div class="line"><label for="ptc">Post Code *: </label><input type="text" id="ptc" /></div>
-                <div class="line submit"><input type="submit" value="Submit" /></div>
- 
-                <p>Note: Please make sure your details are correct before submitting form and that all fields marked with * are completed!.</p>
-            </form>
-        </div>
-    </body>
+   <p align="center"><font color = "red">Username and/or Password entered is/are wrong. Please try again.</font></p>   
+   <a href="index.jsp"><button type="button">Back</button> </a>
+</body>
 </html>

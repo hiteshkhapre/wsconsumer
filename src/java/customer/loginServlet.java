@@ -7,7 +7,7 @@ package customer;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.ServletContext;
+import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.xml.ws.WebServiceRef;
 import ws.RateWebService_Service;
+
 
 /**
  *
@@ -42,21 +43,38 @@ public class loginServlet extends HttpServlet {
             out.println("user input"+username_input);
             String password_input = request.getParameter("password");
             out.println("   user input"+password_input);
+            
             String password_db = getPassword(username_input);
             out.println("    user input"+password_db);
+            
+            String typeOfUser = getTypeOfUser(username_input);
+            out.println("    user type"+typeOfUser);
+            
             if(password_db.equals(password_input))
             {
                 out.println("You are an authorised customer !!");
-                ServletContext context = request.getServletContext();
-                context.setAttribute("User", username_input);
+                //ServletContext context = request.getServletContext();
+                //context.setAttribute("User", username_input);
+                //context.setAttribute("UserType", typeOfUser);
+                String sessionID = UUID.randomUUID().toString();
                 
                 HttpSession session = request.getSession();
                 session.setAttribute("User", username_input);
+                session.setAttribute("UserType", typeOfUser);
+                session.setAttribute("sessionID", sessionID);
                 
-                response.sendRedirect("WelcomePage.jsp");
+                if(typeOfUser.equals("customer"))
+                {
+                    response.sendRedirect("Welcome_Customer.jsp");
+                }else
+                {
+                     response.sendRedirect("Welcome_Admin.jsp");
+                }
+                
             }else
             {
-                response.sendRedirect("index.jsp");
+                
+                response.sendRedirect("wrong_credentials.jsp");
                 
             }
             
@@ -107,6 +125,12 @@ public class loginServlet extends HttpServlet {
         // If the calling of port operations may lead to race condition some synchronization is required.
         ws.RateWebService port = service.getRateWebServicePort();
         return port.getPassword(username);
+    }
+    private String getTypeOfUser(java.lang.String username) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ws.RateWebService port = service.getRateWebServicePort();
+        return port.getTypeofUser(username);
     }
 
 }

@@ -1,9 +1,8 @@
 <%-- 
-    Document   : userLogin
-    Created on : 30-Nov-2014, 12:58:19
+    Document   : adminLogin
+    Created on : 03-Dec-2014, 16:16:56
     Author     : hiteshkhapre
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -36,13 +35,13 @@
 .login-help {
   margin: 20px 0;
   font-size: 11px;
-  color: black;
+  color: white;
   text-align: center;
   text-shadow: 0 1px #2a85a1;
 }
  
 .login-help a {
-  color: black;
+  color: #cce7fa;
   text-decoration: none;
 }
  
@@ -104,7 +103,7 @@
  
 .login p.remember_me label {
   font-size: 12px;
-  color: coral;
+  color: #777;
   cursor: pointer;
 }
  
@@ -240,17 +239,18 @@ body {
     
     <div class="container">
   <div class="login">
-    <h1>Customer Login</h1>
+    <h1>Admin Login</h1>
     <form method="post" action="login">
       <p><input type="text" name="login" value="" placeholder="Username or Email"></p>
       <p><input type="password" name="password" value="" placeholder="Password"></p>
      
       <p class="remember_me">
         <label>
+         <label>
           <input type="checkbox" name="remember_me" id="remember_me">
           Remember me on this computer
         </label>
-      
+        </label>
       </p>
       <p class="submit"><input type="submit" name="commit" value="Login"></p>
     </form>
@@ -258,9 +258,6 @@ body {
  
   <div class="login-help">
     <p>Forgot your password? <a href="#">Click here to reset it</a>.</p>
-  </div>
-        <div class="login-admin">
-    <p style="text-align: center;">Are You Admin? <a href="adminLogin.jsp">Click here to Login</a>.</p>
   </div>
 </div>
     
