@@ -43,14 +43,13 @@ img{
     
     <div id="text9" style="position:absolute; overflow:hidden; left:100px; top:168px; width:300px; height:28px; z-index:18">
 <div class="wpmd">
-    <form action="profileServlet">
-        <button value="<%=session.getAttribute("User")%>"> <font face="Tahoma" class="ws8"><B>MY PROFILE</B></font></button>
-    <!--<a href="profileServlet"><font face="Tahoma" class="ws8"><B>MY PROFILE</B></font></a>-->
-    <div><font color="#808080" face="Tahoma" class="ws8"><BR></font></div></form>
+<UL>
+    <li><a href="Customer_Profile.jsp"><font face="Tahoma" class="ws8"><B>MY PROFILE</B></font></a></li>
+</UL>
+<div><font color="#808080" face="Tahoma" class="ws8"><BR></font></div>
 </div></div>
 
-
-    <div id="text10" style="position:absolute; overflow:hidden; left:100px; top:194px; width:300px; height:28px; z-index:19">
+<div id="text10" style="position:absolute; overflow:hidden; left:100px; top:194px; width:300px; height:28px; z-index:19">
 <div class="wpmd">
 <UL>
 <li><a href="Jobseeker-DownloadCV.htm" ><font face="Tahoma" class="ws8"><B>MY ACCOUNT DETAILS</B></font></a></li>
@@ -91,6 +90,35 @@ img{
 </div></div>
     
 
+        <div style="position:absolute; overflow:hidden; left:350px; top:180px; width:600px; height:auto; z-index:1">
+                <form name="form1" method="POST">
+                  <label for="textfield">Customer ID:</label>
+                  <input name="username" value="<%=session.getAttribute("CustID")%>" /><br><br>
+                  
+                <label for="textfield2">First Name:</label>
+                <input type="text" name="forename1" id="textfield2" value="<%=session.getAttribute("FirstName")%>" /><br><br>
+                
+                <label for="textfield3">Last Name:</label>
+                <input type="text" name="surname" id="textfield3" value="${persons.surname}" /><br><br>
+                
+                <label for="textfield4">Address Line 1:</label>
+                <input type="text" name="addressLine1" id="textfield4" value="${persons.addressLine1}" /><br><br>
+                
+                <label for="textfield5">Address Line 2:</label>
+                <input type="text" name="addressLine2" id="textfield5" value="${persons.addressLine2}" />
+                <br><br>
+                <label for="town">City:</label>
+                <input type="text" name="town" id="Town" value="${persons.town}" /><br><br>
+                
+                <label for="postcode">Contact Number:</label>
+                <input type="text" name="postcode" id="Postcode" value="${persons.postcode}" /><br><br>
+                
+                <label for="postcode">Email:</label>
+                <input type="text" name="mobile" id="textfield6" value="${persons.mobile}" /><br><br>
+                </form>
+        </div>
+                
+              
     
 </body>
 </html>
