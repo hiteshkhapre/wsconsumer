@@ -92,26 +92,22 @@ img{
 
         <div style="position:absolute; overflow:hidden; left:350px; top:180px; width:600px; height:auto; z-index:1">
                 <form name="form1" method="POST">
-                    <p><label for="textfield">Customer ID:</label><%=session.getAttribute("CustID")%></p>
+                    
+                     <p><label for="textfield5">Customer ID:</label><%=session.getAttribute("CustID")%></p>
+                
+                    <p><label for="textfield">Account Number:</label><%=session.getAttribute("AccountNumber")%></p>
                                     
-                <p><label for="textfield2">First Name:</label><%=session.getAttribute("FirstName")%></p>
+                <p><label for="textfield2">Account Type:</label><%=session.getAttribute("AccountType")%></p>
                 
                 
-                <p><label for="textfield3">Last Name:</label><%=session.getAttribute("LastName")%></p>
+                <p><label for="textfield3">Account Balance (£) :</label><%=session.getAttribute("AccountBalance")%></p>
                
                 
-                <p><label for="textfield4">Address Line 1:</label><%=session.getAttribute("AddressLine1")%></p>
+                <p><label for="textfield4">Account Status:</label><%=session.getAttribute("AccountStatus")%></p>
                
                 
-                <p><label for="textfield5">Address Line 2:</label><%=session.getAttribute("AddressLine2")%></p>
-                
                
-                <p><label for="City:">City:</label><%=session.getAttribute("City")%></p>
                
-                
-                <p><label for="Contact">Contact Number:</label><%=session.getAttribute("ContactNumber")%></p>
-               
-                <p><label for="Email:">Email:</label><%=session.getAttribute("Email")%></p>
                
                 </form>
         </div>

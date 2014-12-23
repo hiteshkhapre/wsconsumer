@@ -43,17 +43,17 @@ img{
     
     <div id="text9" style="position:absolute; overflow:hidden; left:100px; top:168px; width:300px; height:28px; z-index:18">
 <div class="wpmd">
-    <form action="profileServlet">
-        <button value="<%=session.getAttribute("User")%>"> <font face="Tahoma" class="ws8"><B>MY PROFILE</B></font></button>
-    <!--<a href="profileServlet"><font face="Tahoma" class="ws8"><B>MY PROFILE</B></font></a>-->
-    <div><font color="#808080" face="Tahoma" class="ws8"><BR></font></div></form>
+<UL>
+    <li><a href="profileServlet"><font face="Tahoma" class="ws8"><B>MY PROFILE</B></font></a></li>
+</UL>
+    <div><font color="#808080" face="Tahoma" class="ws8"><BR></font></div>
 </div></div>
 
 
     <div id="text10" style="position:absolute; overflow:hidden; left:100px; top:194px; width:300px; height:28px; z-index:19">
 <div class="wpmd">
 <UL>
-<li><a href="Jobseeker-DownloadCV.htm" ><font face="Tahoma" class="ws8"><B>MY ACCOUNT DETAILS</B></font></a></li>
+<li><a href="AccountServlet"><font face="Tahoma" class="ws8"><B>MY ACCOUNT DETAILS</B></font></a></li>
 </UL>
 <div><font color="#808080" face="Tahoma" class="ws8"><BR></font></div>
 </div></div>

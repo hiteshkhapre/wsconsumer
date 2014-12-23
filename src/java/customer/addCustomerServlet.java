@@ -11,18 +11,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.xml.ws.WebServiceRef;
-import ws.CustomerProfile;
-import ws.CustomerWebService_Service;
 
 /**
  *
  * @author hiteshkhapre
  */
-public class profileServlet extends HttpServlet {
-    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/wsRate/CustomerWebService.wsdl")
-    private CustomerWebService_Service service;
+public class addCustomerServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,26 +29,33 @@ public class profileServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        CustomerProfile customerProfile = null;
+        
         try (PrintWriter out = response.getWriter()) {
-          
-             //String username_input = "hk";
-            String username_input = request.getSession().getAttribute("User").toString();
-              
-            out.println("user input"+(String) username_input);
-            CustomerProfile customerProfile = getMyProfile(username_input);
+           
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            String firstname = request.getParameter("firstname");
+            String lastname = request.getParameter("lastname");
+            String addressline1 = request.getParameter("addressline1");
+            String addressline2 = request.getParameter("addressline2");
+            String city = request.getParameter("city");
+            String contactnumber = request.getParameter("contactnumber");
+            String email = request.getParameter("email");
+            String accountType = request.getParameter("accounttype");
             
-            HttpSession session = request.getSession();
-            session.setAttribute("CustID", customerProfile.getCustID());
-            session.setAttribute("FirstName", customerProfile.getCustFirstname());
-            session.setAttribute("LastName", customerProfile.getCustLastname());
-            session.setAttribute("AddressLine1", customerProfile.getCustAddressline1());
-            session.setAttribute("AddressLine2", customerProfile.getCustAddressline2());
-            session.setAttribute("City", customerProfile.getCustCity());
-            session.setAttribute("ContactNumber", customerProfile.getCustContactnumber()); 
-            session.setAttribute("Email", customerProfile.getCustEmail());
+            customerProfile.setCustFirstname(firstname);
+            customerProfile.setCustLastname(lastname);
+            customerProfile.setCustAddressline1(addressline1);
+            customerProfile.setCustAddressline2(addressline2);
+            customerProfile.setCustCity(city);
+            customerProfile.setCustContactnumber(contactnumber);
+            customerProfile.setCustEmail(email);
+                 
             
-            response.sendRedirect("Customer_Profile.jsp");
+            //String success_string = 
+            
         }
     }
 
@@ -96,12 +97,5 @@ public class profileServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    private CustomerProfile getMyProfile(java.lang.String customerUsername) {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        ws.CustomerWebService port = service.getCustomerWebServicePort();
-        return port.getMyProfile(customerUsername);
-    }
 
 }

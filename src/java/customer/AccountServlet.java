@@ -7,24 +7,22 @@ package customer;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.UUID;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.xml.ws.WebServiceRef;
-import ws.RateWebService_Service;
-
+import ws.Account;
+import ws.CustomerWebService_Service;
 
 /**
  *
  * @author hiteshkhapre
  */
-public class loginServlet extends HttpServlet {
-    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/wsRate/RateWebService.wsdl")
-    private RateWebService_Service service;
+public class AccountServlet extends HttpServlet {
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/wsRate/CustomerWebService.wsdl")
+    private ws.CustomerWebService_Service service;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,46 +37,21 @@ public class loginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            String username_input = request.getParameter("login");
-            out.println("user input"+username_input);
-            String password_input = request.getParameter("password");
-            out.println("   user input"+password_input);
+        
+             //String username_input = "hk";
+            String cust_ID = request.getSession().getAttribute("CustID").toString();
+              
+            out.println("CustID"+(String) cust_ID);
             
-            String password_db = getPassword(username_input);
-            out.println("    user input"+password_db);
+            Account account = getAccountDetails(cust_ID);
             
-            String typeOfUser = getTypeOfUser(username_input);
-            out.println("    user type"+typeOfUser);
+            HttpSession session = request.getSession();
+            session.setAttribute("AccountNumber", account.getAccountNumber());
+            session.setAttribute("AccountType", account.getAccountType());
+            session.setAttribute("AccountBalance", account.getAccountBalance());
+            session.setAttribute("AccountStatus", account.getAccountStatus());
             
-            if(password_db.equals(password_input))
-            {
-                out.println("You are an authorised customer !!");
-                ServletContext context = getServletContext();
-                context.setAttribute("User", username_input);
-                context.setAttribute("UserType", typeOfUser);
-                String sessionID = UUID.randomUUID().toString();
-                
-                HttpSession session = request.getSession();
-                session.setAttribute("User", username_input);
-                session.setAttribute("UserType", typeOfUser);
-                session.setAttribute("sessionID", sessionID);
-                
-                
-                if(typeOfUser.equals("customer"))
-                {
-                    response.sendRedirect("Welcome_Customer.jsp");
-                }else
-                {
-                     response.sendRedirect("Welcome_Admin.jsp");
-                }
-                
-            }else
-            {
-                
-                response.sendRedirect("wrong_credentials.jsp");
-                
-            }
+             response.sendRedirect("Customer_Account.jsp");
             
         }
     }
@@ -122,17 +95,11 @@ public class loginServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private String getPassword(java.lang.String username) {
+    private ws.Account getAccountDetails(java.lang.String custID) {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
-        ws.RateWebService port = service.getRateWebServicePort();
-        return port.getPassword(username);
-    }
-    private String getTypeOfUser(java.lang.String username) {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        ws.RateWebService port = service.getRateWebServicePort();
-        return port.getTypeofUser(username);
+        ws.CustomerWebService port = service.getCustomerWebServicePort();
+        return port.getAccountDetails(custID);
     }
 
 }

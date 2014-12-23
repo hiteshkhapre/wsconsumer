@@ -44,7 +44,7 @@ img{
     <div id="text9" style="position:absolute; overflow:hidden; left:100px; top:168px; width:300px; height:28px; z-index:18">
 <div class="wpmd">
 <UL>
-    <li><a href="Jobseeker-MyProfile.htm"><font face="Tahoma" class="ws8"><B>ADD CUSTOMER</B></font></a></li>
+    <li><a href="addCustomerForm.jsp"><font face="Tahoma" class="ws8"><B>ADD CUSTOMER</B></font></a></li>
 </UL>
 <div><font color="#808080" face="Tahoma" class="ws8"><BR></font></div>
 </div></div>
