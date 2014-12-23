@@ -1,5 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.1-b419 (branches/2.3.1.x-7937; 2014-08-04T08:11:03+0000) JAXWS-RI/2.2.10-b140803.1500 JAXWS-API/2.2.11 JAXB-RI/2.2.10-b140802.1033 JAXB-API/2.2.12-b140109.1041 svn-revision#unknown. --><xs:schema xmlns:tns="http://ws/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://ws/">
 
+<xs:element name="addCustomer" type="tns:addCustomer"/>
+
+<xs:element name="addCustomerResponse" type="tns:addCustomerResponse"/>
+
 <xs:element name="getAccountDetails" type="tns:getAccountDetails"/>
 
 <xs:element name="getAccountDetailsResponse" type="tns:getAccountDetailsResponse"/>
@@ -7,6 +11,26 @@
 <xs:element name="getMyProfile" type="tns:getMyProfile"/>
 
 <xs:element name="getMyProfileResponse" type="tns:getMyProfileResponse"/>
+
+<xs:element name="getTotalNumberOfCustomers" type="tns:getTotalNumberOfCustomers"/>
+
+<xs:element name="getTotalNumberOfCustomersResponse" type="tns:getTotalNumberOfCustomersResponse"/>
+
+<xs:element name="insertOperation" type="tns:insertOperation"/>
+
+<xs:element name="insertOperationResponse" type="tns:insertOperationResponse"/>
+
+<xs:complexType name="insertOperation">
+<xs:sequence>
+<xs:element name="username" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="insertOperationResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
 
 <xs:complexType name="getAccountDetails">
 <xs:sequence>
@@ -23,10 +47,41 @@
 <xs:complexType name="account">
 <xs:sequence>
 <xs:element name="accountBalance" type="xs:string" minOccurs="0"/>
-<xs:element name="accountNumber" type="xs:string" minOccurs="0"/>
+<xs:element name="accountNumber" type="xs:int"/>
 <xs:element name="accountStatus" type="xs:string" minOccurs="0"/>
 <xs:element name="accountType" type="xs:string" minOccurs="0"/>
-<xs:element name="custID" type="xs:string" minOccurs="0"/>
+<xs:element name="custID" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="addCustomer">
+<xs:sequence>
+<xs:element name="parameter" type="tns:customerProfile" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="customerProfile">
+<xs:sequence>
+<xs:element name="accountBalance" type="xs:double" minOccurs="0"/>
+<xs:element name="accountNumber" type="xs:int"/>
+<xs:element name="accountStatus" type="xs:string" minOccurs="0"/>
+<xs:element name="accountType" type="xs:string" minOccurs="0"/>
+<xs:element name="cust_Addressline1" type="xs:string" minOccurs="0"/>
+<xs:element name="cust_Addressline2" type="xs:string" minOccurs="0"/>
+<xs:element name="cust_City" type="xs:string" minOccurs="0"/>
+<xs:element name="cust_Contactnumber" type="xs:string" minOccurs="0"/>
+<xs:element name="cust_Email" type="xs:string" minOccurs="0"/>
+<xs:element name="cust_ID" type="xs:int"/>
+<xs:element name="cust_Password" type="xs:string" minOccurs="0"/>
+<xs:element name="cust_Username" type="xs:string" minOccurs="0"/>
+<xs:element name="cust_firstname" type="xs:string" minOccurs="0"/>
+<xs:element name="cust_lastname" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="addCustomerResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -42,16 +97,13 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="customerProfile">
+<xs:complexType name="getTotalNumberOfCustomers">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getTotalNumberOfCustomersResponse">
 <xs:sequence>
-<xs:element name="cust_Addressline1" type="xs:string" minOccurs="0"/>
-<xs:element name="cust_Addressline2" type="xs:string" minOccurs="0"/>
-<xs:element name="cust_City" type="xs:string" minOccurs="0"/>
-<xs:element name="cust_Contactnumber" type="xs:string" minOccurs="0"/>
-<xs:element name="cust_Email" type="xs:string" minOccurs="0"/>
-<xs:element name="cust_ID" type="xs:string" minOccurs="0"/>
-<xs:element name="cust_firstname" type="xs:string" minOccurs="0"/>
-<xs:element name="cust_lastname" type="xs:string" minOccurs="0"/>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 </xs:schema>

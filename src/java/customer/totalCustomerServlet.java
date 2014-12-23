@@ -5,7 +5,6 @@
  */
 package customer;
 
-import ws.CustomerProfile;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -15,14 +14,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.WebServiceRef;
 import ws.CustomerWebService_Service;
 
-
 /**
  *
  * @author hiteshkhapre
  */
-public class addCustomerServlet extends HttpServlet {
- @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/wsRate/CustomerWebService.wsdl")
+public class totalCustomerServlet extends HttpServlet {
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/wsRate/CustomerWebService.wsdl")
     private CustomerWebService_Service service;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -35,60 +34,16 @@ public class addCustomerServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        CustomerProfile customerProfile = new CustomerProfile();
-        
         try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+           int totalNumberOfCustomers = getTotalNumberOfCustomers();
+           String msg = "Total number of Customers are "+totalNumberOfCustomers;
            
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            
-            String firstname = request.getParameter("firstname");
-            String lastname = request.getParameter("lastname");
-            String addressline1 = request.getParameter("addressline1");
-            String addressline2 = request.getParameter("addressline2");
-            String city = request.getParameter("city");
-            String contactnumber = request.getParameter("contactnumber");
-            String email = request.getParameter("email");
-            
-            String accountType = request.getParameter("accounttype");
-            Double intialamount = Double.valueOf(request.getParameter("intialamount"));
-            
-            
-            customerProfile.setCustUsername(username);
-            customerProfile.setCustPassword(password);
-            //customerProfile.
-            
-            
-            customerProfile.setCustFirstname(firstname);
-            customerProfile.setCustLastname(lastname);
-            customerProfile.setCustAddressline1(addressline1);
-            customerProfile.setCustAddressline2(addressline2);
-            customerProfile.setCustCity(city);
-            customerProfile.setCustContactnumber(contactnumber);
-            customerProfile.setCustEmail(email);
-            
-            customerProfile.setAccountType(accountType);
-            customerProfile.setAccountBalance(intialamount);
-            
-            String successString = addCustomer(customerProfile);
-            
-            if(successString.equals("Inserted"))
-            {
-            out.println("<script type=\"text/javascript\">");  
-            out.println("alert('Customer Added Successfully');");
+           out.println("<script type=\"text/javascript\">");  
+        
+          out.println("alert(\"" +msg+ "\")");
              out.println("location='Welcome_Admin.jsp';");
             out.println("</script>");
-           // response.sendRedirect("Welcome_Admin.jsp");
-            }
-            else
-            {
-                out.println("<script type=\"text/javascript\">");  
-            out.println("alert('Customer was not added due to some problems. Please try again.');");  
-             out.println("location='Welcome_Admin.jsp';");
-            out.println("</script>");
-           // response.sendRedirect("Welcome_Admin.jsp");
-            }         
-            
         }
     }
 
@@ -131,11 +86,11 @@ public class addCustomerServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private String addCustomer(ws.CustomerProfile parameter) {
+    private Integer getTotalNumberOfCustomers() {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
         ws.CustomerWebService port = service.getCustomerWebServicePort();
-        return port.addCustomer(parameter);
+        return port.getTotalNumberOfCustomers();
     }
 
 }

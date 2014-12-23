@@ -37,7 +37,7 @@
     <client name="CustomerWebService">
       <wsdl-url>http://localhost:8080/wsRate/CustomerWebService?wsdl</wsdl-url>
       <local-wsdl-file>localhost_8080/wsRate/CustomerWebService.wsdl</local-wsdl-file>
-      <package-name forceReplace="true">customer</package-name>
+      <package-name>ws</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <wsimport-options>
         <wsimport-option>
@@ -63,10 +63,6 @@
         <wsimport-option>
           <wsimport-option-name>xendorsed</wsimport-option-name>
           <wsimport-option-value>true</wsimport-option-value>
-        </wsimport-option>
-        <wsimport-option>
-          <wsimport-option-name>package</wsimport-option-name>
-          <wsimport-option-value>customer</wsimport-option-value>
         </wsimport-option>
       </wsimport-options>
     </client>

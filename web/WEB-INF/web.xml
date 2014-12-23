@@ -16,6 +16,14 @@
         <servlet-name>addCustomerServlet</servlet-name>
         <servlet-class>customer.addCustomerServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>totalCustomerServlet</servlet-name>
+        <servlet-class>customer.totalCustomerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deleteCustomerServlet</servlet-name>
+        <servlet-class>customer.deleteCustomerServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -31,6 +39,14 @@
     <servlet-mapping>
         <servlet-name>addCustomerServlet</servlet-name>
         <url-pattern>/addCustomerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>totalCustomerServlet</servlet-name>
+        <url-pattern>/totalCustomerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteCustomerServlet</servlet-name>
+        <url-pattern>/deleteCustomerServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

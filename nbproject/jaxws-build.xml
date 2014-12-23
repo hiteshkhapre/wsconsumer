@@ -44,7 +44,7 @@
     </target>
     <target name="wsimport-client-CustomerWebService" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/CustomerWebService"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/CustomerWebService" destdir="${build.generated.dir}/jax-wsCache/CustomerWebService" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/CustomerWebService/wsdl/localhost_8080/wsRate/CustomerWebService.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/wsRate/CustomerWebService?wsdl" xnocompile="true" xendorsed="true" package="customer">
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/CustomerWebService" destdir="${build.generated.dir}/jax-wsCache/CustomerWebService" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/CustomerWebService/wsdl/localhost_8080/wsRate/CustomerWebService.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/wsRate/CustomerWebService?wsdl" xnocompile="true" xendorsed="true">
             <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/CustomerWebService/wsdl/localhost_8080/wsRate/CustomerWebService.wsdl"/>
             <produces dir="${build.generated.dir}/jax-wsCache/CustomerWebService"/>
         </wsimport>
@@ -55,7 +55,7 @@
         </copy>
     </target>
     <target name="wsimport-client-clean-CustomerWebService" depends="-init-project">
-        <delete dir="${build.generated.sources.dir}/jax-ws/customer"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/ws"/>
         <delete dir="${build.generated.dir}/jax-wsCache/CustomerWebService"/>
     </target>
     <target name="wsimport-client-generate" depends="wsimport-client-RateWebService, wsimport-client-CustomerWebService"/>

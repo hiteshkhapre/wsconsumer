@@ -4,6 +4,12 @@
 <xsd:import namespace="http://ws/" schemaLocation="http://localhost:8080/wsRate/CustomerWebService?xsd=1"/>
 </xsd:schema>
 </types>
+<message name="getTotalNumberOfCustomers">
+<part name="parameters" element="tns:getTotalNumberOfCustomers"/>
+</message>
+<message name="getTotalNumberOfCustomersResponse">
+<part name="parameters" element="tns:getTotalNumberOfCustomersResponse"/>
+</message>
 <message name="getMyProfile">
 <part name="parameters" element="tns:getMyProfile"/>
 </message>
@@ -16,7 +22,23 @@
 <message name="getAccountDetailsResponse">
 <part name="parameters" element="tns:getAccountDetailsResponse"/>
 </message>
+<message name="addCustomer">
+<part name="parameters" element="tns:addCustomer"/>
+</message>
+<message name="addCustomerResponse">
+<part name="parameters" element="tns:addCustomerResponse"/>
+</message>
+<message name="insertOperation">
+<part name="parameters" element="tns:insertOperation"/>
+</message>
+<message name="insertOperationResponse">
+<part name="parameters" element="tns:insertOperationResponse"/>
+</message>
 <portType name="CustomerWebService">
+<operation name="getTotalNumberOfCustomers">
+<input wsam:Action="http://ws/CustomerWebService/getTotalNumberOfCustomersRequest" message="tns:getTotalNumberOfCustomers"/>
+<output wsam:Action="http://ws/CustomerWebService/getTotalNumberOfCustomersResponse" message="tns:getTotalNumberOfCustomersResponse"/>
+</operation>
 <operation name="getMyProfile">
 <input wsam:Action="http://ws/CustomerWebService/getMyProfileRequest" message="tns:getMyProfile"/>
 <output wsam:Action="http://ws/CustomerWebService/getMyProfileResponse" message="tns:getMyProfileResponse"/>
@@ -25,9 +47,26 @@
 <input wsam:Action="http://ws/CustomerWebService/getAccountDetailsRequest" message="tns:getAccountDetails"/>
 <output wsam:Action="http://ws/CustomerWebService/getAccountDetailsResponse" message="tns:getAccountDetailsResponse"/>
 </operation>
+<operation name="addCustomer">
+<input wsam:Action="http://ws/CustomerWebService/addCustomerRequest" message="tns:addCustomer"/>
+<output wsam:Action="http://ws/CustomerWebService/addCustomerResponse" message="tns:addCustomerResponse"/>
+</operation>
+<operation name="insertOperation">
+<input wsam:Action="http://ws/CustomerWebService/insertOperationRequest" message="tns:insertOperation"/>
+<output wsam:Action="http://ws/CustomerWebService/insertOperationResponse" message="tns:insertOperationResponse"/>
+</operation>
 </portType>
 <binding name="CustomerWebServicePortBinding" type="tns:CustomerWebService">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<operation name="getTotalNumberOfCustomers">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="getMyProfile">
 <soap:operation soapAction=""/>
 <input>
@@ -38,6 +77,24 @@
 </output>
 </operation>
 <operation name="getAccountDetails">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="addCustomer">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="insertOperation">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
