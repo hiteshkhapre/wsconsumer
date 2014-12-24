@@ -83,8 +83,8 @@ public class addCustomerServlet extends HttpServlet {
             else
             {
                 out.println("<script type=\"text/javascript\">");  
-            out.println("alert('Customer was not added due to some problems. Please try again.');");  
-             out.println("location='Welcome_Admin.jsp';");
+            out.println("alert('Customer Details were not added due to some problems. Please try again.');");  
+             //out.println("location='Welcome_Admin.jsp';");
             out.println("</script>");
            // response.sendRedirect("Welcome_Admin.jsp");
             }         

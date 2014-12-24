@@ -1,8 +1,14 @@
 <?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.1-b419 (branches/2.3.1.x-7937; 2014-08-04T08:11:03+0000) JAXWS-RI/2.2.10-b140803.1500 JAXWS-API/2.2.11 JAXB-RI/2.2.10-b140802.1033 JAXB-API/2.2.12-b140109.1041 svn-revision#unknown. --><xs:schema xmlns:tns="http://ws/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://ws/">
 
+<xs:element name="SQLException" type="tns:SQLException"/>
+
 <xs:element name="addCustomer" type="tns:addCustomer"/>
 
 <xs:element name="addCustomerResponse" type="tns:addCustomerResponse"/>
+
+<xs:element name="deleteCustomer" type="tns:deleteCustomer"/>
+
+<xs:element name="deleteCustomerResponse" type="tns:deleteCustomerResponse"/>
 
 <xs:element name="getAccountDetails" type="tns:getAccountDetails"/>
 
@@ -32,9 +38,46 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="SQLException">
+<xs:sequence>
+<xs:element name="SQLState" type="xs:string" minOccurs="0"/>
+<xs:element name="errorCode" type="xs:int"/>
+<xs:element name="message" type="xs:string" minOccurs="0"/>
+<xs:element name="nextException" type="tns:sqlException" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="sqlException">
+<xs:complexContent>
+<xs:extension base="tns:exception">
+<xs:sequence>
+<xs:element name="nextException" type="tns:sqlException" minOccurs="0"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="exception">
+<xs:complexContent>
+<xs:extension base="tns:throwable">
+<xs:sequence/>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="throwable">
+<xs:sequence>
+<xs:element name="stackTrace" type="tns:stackTraceElement" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="stackTraceElement" final="extension restriction">
+<xs:sequence/>
+</xs:complexType>
+
 <xs:complexType name="getAccountDetails">
 <xs:sequence>
-<xs:element name="custID" type="xs:string" minOccurs="0"/>
+<xs:element name="custID" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -46,7 +89,7 @@
 
 <xs:complexType name="account">
 <xs:sequence>
-<xs:element name="accountBalance" type="xs:string" minOccurs="0"/>
+<xs:element name="accountBalance" type="xs:double" minOccurs="0"/>
 <xs:element name="accountNumber" type="xs:int"/>
 <xs:element name="accountStatus" type="xs:string" minOccurs="0"/>
 <xs:element name="accountType" type="xs:string" minOccurs="0"/>
@@ -94,6 +137,18 @@
 <xs:complexType name="getMyProfileResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:customerProfile" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deleteCustomer">
+<xs:sequence>
+<xs:element name="custID" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="deleteCustomerResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 

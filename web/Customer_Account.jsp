@@ -38,7 +38,8 @@ img{
     <body>
         <img src="images/abclogo.jpg" alt="ABC Bank Logo" style="width:216px;height:68px">
         <h1 align="center">Welcome to ABC Bank</h1>
-        <p align="center"><font color = "red">Welcome Mr. <%=session.getAttribute("User")%> logged in as <%=session.getAttribute("UserType")%></font></p>
+                <p align="center"><font color = "red">Welcome Mr. <%=session.getAttribute("FirstName")%> logged in as <%=session.getAttribute("UserType")%></font></p>
+<p align="center"><font color = "red">Customer ID is <%=session.getAttribute("CustID")%></font></p>
 
     
     <div id="text9" style="position:absolute; overflow:hidden; left:100px; top:168px; width:300px; height:28px; z-index:18">
@@ -68,7 +69,7 @@ img{
 <div id="text12" style="position:absolute; overflow:hidden; left:100px; top:243px; width:300px; height:28px; z-index:21">
 <div class="wpmd">
 <UL>
-    <li><a href="Jobseeker-CareerAdvice.htm" ><font face="Tahoma" class="ws8"><B>DEPOSIT MONEY</B></font></a></li>
+    <li><a href="depositMoney.jsp" ><font face="Tahoma" class="ws8"><B>DEPOSIT MONEY</B></font></a></li>
 </UL>
 <div><font color="#808080" face="Tahoma" class="ws8"><BR></font></div>
 </div></div>
@@ -76,7 +77,7 @@ img{
 <div id="text2" style="position:absolute; overflow:hidden; left:100px; top:267px; width:300px; height:28px; z-index:22">
 <div class="wpmd">
 <UL>
-<li><a href="Jobseeker-Help.htm" ><font face="Tahoma" class="ws8"><B>WITHDRAW MONEY</B></font></a></li>
+<li><a href="withdrawMoney.jsp" ><font face="Tahoma" class="ws8"><B>WITHDRAW MONEY</B></font></a></li>
 </UL>
 <div><font color="#808080" face="Tahoma" class="ws8"><BR></font></div>
 </div></div>

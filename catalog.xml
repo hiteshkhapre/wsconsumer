@@ -6,4 +6,6 @@
     <system systemId="http://localhost:8080/wsRate/RateWebService?xsd=1" uri="src/conf/xml-resources/web-service-references/RateWebService/wsdl/localhost_8080/wsRate/RateWebService.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/wsRate/CustomerWebService?wsdl" uri="src/conf/xml-resources/web-service-references/CustomerWebService/wsdl/localhost_8080/wsRate/CustomerWebService.wsdl"/>
     <system systemId="http://localhost:8080/wsRate/CustomerWebService?xsd=1" uri="src/conf/xml-resources/web-service-references/CustomerWebService/wsdl/localhost_8080/wsRate/CustomerWebService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/wsRate/TransactionWebService?wsdl" uri="src/conf/xml-resources/web-service-references/TransactionWebService/wsdl/localhost_8080/wsRate/TransactionWebService.wsdl"/>
+    <system systemId="http://localhost:8080/wsRate/TransactionWebService?xsd=1" uri="src/conf/xml-resources/web-service-references/TransactionWebService/wsdl/localhost_8080/wsRate/TransactionWebService.xsd_1.xsd"/>
 </catalog>

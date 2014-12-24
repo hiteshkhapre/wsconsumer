@@ -3,26 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package customer;
+package transactions;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigInteger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.xml.ws.WebServiceRef;
-import ws.Account;
-import ws.CustomerWebService_Service;
 
 /**
  *
  * @author hiteshkhapre
  */
-public class AccountServlet extends HttpServlet {
-    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/wsRate/CustomerWebService.wsdl")
-    private ws.CustomerWebService_Service service;
+public class depositServlet extends HttpServlet {
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/wsRate/TransactionWebService.wsdl")
+    private TransactionWebService_Service service;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,22 +35,32 @@ public class AccountServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-        
-             //String username_input = "hk";
-            int cust_ID = Integer.valueOf(request.getSession().getAttribute("CustID").toString());
-              
-            out.println("CustID"+cust_ID);
             
-            Account account = getAccountDetails(cust_ID);
+            String accountNumber = request.getSession().getAttribute("AccountNumber").toString();
+            int custID = Integer.valueOf(request.getParameter("custID").toString());
+            Double depositAmount = (Double.valueOf(request.getParameter("depositAmount").toString()));
             
-            HttpSession session = request.getSession();
-            session.setAttribute("AccountNumber", account.getAccountNumber());
-            session.setAttribute("AccountType", account.getAccountType());
-            session.setAttribute("AccountBalance", account.getAccountBalance());
-            session.setAttribute("AccountStatus", account.getAccountStatus());
-            
-             response.sendRedirect("Customer_Account.jsp");
-            
+            //Call the deposit web service operation 
+            String successString = depositMoney(depositAmount, custID);
+            Account account = getAccountDetails(custID);
+            Double newBalance = account.getAccountBalance();
+            String msg = "Deposit Successful. Your new Balance is ".concat(newBalance.toString());
+                    
+                    
+             if(successString.equals("Deposited"))
+            {
+            out.println("<script type=\"text/javascript\">");  
+             out.println("alert(\"" +msg+ "\")");
+             out.println("location='depositMoney.jsp';");
+            out.println("</script>");
+            }
+            else
+            {
+                out.println("<script type=\"text/javascript\">");  
+            out.println("alert('Deposit is unsuccessful due to some problems. Please try again.');");  
+             out.println("location='depositMoney.jsp';");
+            out.println("</script>");
+            }         
         }
     }
 
@@ -95,11 +103,20 @@ public class AccountServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private String depositMoney(java.lang.Double amount, int custID) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        transactions.TransactionWebService port = service.getTransactionWebServicePort();
+        return port.depositMoney(amount, custID);
+    }
+
     private Account getAccountDetails(int custID) {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
-        ws.CustomerWebService port = service.getCustomerWebServicePort();
+        transactions.TransactionWebService port = service.getTransactionWebServicePort();
         return port.getAccountDetails(custID);
     }
 
+    
+    
 }

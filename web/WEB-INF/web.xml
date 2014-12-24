@@ -24,6 +24,14 @@
         <servlet-name>deleteCustomerServlet</servlet-name>
         <servlet-class>customer.deleteCustomerServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>depositServlet</servlet-name>
+        <servlet-class>transactions.depositServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>withdrawServlet</servlet-name>
+        <servlet-class>transactions.withdrawServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -47,6 +55,14 @@
     <servlet-mapping>
         <servlet-name>deleteCustomerServlet</servlet-name>
         <url-pattern>/deleteCustomerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>depositServlet</servlet-name>
+        <url-pattern>/depositServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>withdrawServlet</servlet-name>
+        <url-pattern>/withdrawServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

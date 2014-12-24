@@ -60,7 +60,7 @@ img{
 <div id="text11" style="position:absolute; overflow:hidden; left:100px; top:220px; width:300px; height:28px; z-index:20">
 <div class="wpmd">
 <UL>
-<li><font face="Tahoma" class="ws8"><B>DELETE CUSTOMER</B></font></li>
+    <li><a href="deleteCustomerForm.jsp"><font face="Tahoma" class="ws8"><B>DELETE CUSTOMER</B></font></a></li>
 </UL>
 <div><font color="#808080" face="Tahoma" class="ws8"><BR></font></div>
 </div></div>

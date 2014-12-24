@@ -58,5 +58,21 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/ws"/>
         <delete dir="${build.generated.dir}/jax-wsCache/CustomerWebService"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-RateWebService, wsimport-client-CustomerWebService"/>
+    <target name="wsimport-client-TransactionWebService" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/TransactionWebService"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/TransactionWebService" destdir="${build.generated.dir}/jax-wsCache/TransactionWebService" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/TransactionWebService/wsdl/localhost_8080/wsRate/TransactionWebService.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/wsRate/TransactionWebService?wsdl" xnocompile="true" xendorsed="true" package="transactions">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/TransactionWebService/wsdl/localhost_8080/wsRate/TransactionWebService.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/TransactionWebService"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/TransactionWebService">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-TransactionWebService" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/transactions"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/TransactionWebService"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-RateWebService, wsimport-client-CustomerWebService, wsimport-client-TransactionWebService"/>
 </project>
