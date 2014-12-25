@@ -4,6 +4,12 @@
 <xsd:import namespace="http://transaction/" schemaLocation="http://localhost:8080/wsRate/TransactionWebService?xsd=1"/>
 </xsd:schema>
 </types>
+<message name="getTransactions">
+<part name="parameters" element="tns:getTransactions"/>
+</message>
+<message name="getTransactionsResponse">
+<part name="parameters" element="tns:getTransactionsResponse"/>
+</message>
 <message name="depositMoney">
 <part name="parameters" element="tns:depositMoney"/>
 </message>
@@ -23,6 +29,10 @@
 <part name="parameters" element="tns:withdrawMoneyResponse"/>
 </message>
 <portType name="TransactionWebService">
+<operation name="getTransactions">
+<input wsam:Action="http://transaction/TransactionWebService/getTransactionsRequest" message="tns:getTransactions"/>
+<output wsam:Action="http://transaction/TransactionWebService/getTransactionsResponse" message="tns:getTransactionsResponse"/>
+</operation>
 <operation name="depositMoney">
 <input wsam:Action="http://transaction/TransactionWebService/depositMoneyRequest" message="tns:depositMoney"/>
 <output wsam:Action="http://transaction/TransactionWebService/depositMoneyResponse" message="tns:depositMoneyResponse"/>
@@ -38,6 +48,15 @@
 </portType>
 <binding name="TransactionWebServicePortBinding" type="tns:TransactionWebService">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<operation name="getTransactions">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="depositMoney">
 <soap:operation soapAction=""/>
 <input>

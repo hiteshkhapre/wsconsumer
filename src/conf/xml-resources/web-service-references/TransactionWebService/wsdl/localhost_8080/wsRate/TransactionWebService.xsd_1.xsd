@@ -8,6 +8,10 @@
 
 <xs:element name="getAccountDetailsResponse" type="tns:getAccountDetailsResponse"/>
 
+<xs:element name="getTransactions" type="tns:getTransactions"/>
+
+<xs:element name="getTransactionsResponse" type="tns:getTransactionsResponse"/>
+
 <xs:element name="withdrawMoney" type="tns:withdrawMoney"/>
 
 <xs:element name="withdrawMoneyResponse" type="tns:withdrawMoneyResponse"/>
@@ -31,6 +35,28 @@
 <xs:element name="accountStatus" type="xs:string" minOccurs="0"/>
 <xs:element name="accountType" type="xs:string" minOccurs="0"/>
 <xs:element name="custID" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getTransactions">
+<xs:sequence>
+<xs:element name="accountNumber" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getTransactionsResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:transactions" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="transactions">
+<xs:sequence>
+<xs:element name="accountNumber" type="xs:int"/>
+<xs:element name="dateTime" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="transactionAmount" type="xs:double" minOccurs="0"/>
+<xs:element name="transactionID" type="xs:int"/>
+<xs:element name="transactionType" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 

@@ -62,7 +62,7 @@ img{
 <div id="text11" style="position:absolute; overflow:hidden; left:100px; top:220px; width:300px; height:28px; z-index:20">
 <div class="wpmd">
 <UL>
-<li><a href="downloadStat.jsp"><font face="Tahoma" class="ws8"><B>DOWNLOAD MY STATEMENT</B></font></a></li>
+    <li><a href="downloadStat.jsp"><font face="Tahoma" class="ws8"><B>DOWNLOAD MY STATEMENT</B></font></a></li>
 </UL>
 <div><font color="#808080" face="Tahoma" class="ws8"><BR></font></div>
 </div></div>
@@ -92,15 +92,13 @@ img{
 </div></div>
     
 <div style="position:absolute; overflow:hidden; left:350px; top:180px; width:500px; height:auto; z-index:1">
-    <p style="text-align: center;"><b>Withdraw Money</b></p>
+    <p style="text-align: center;"><b>Get the Statement</b></p>
     
-<form method="post" action="withdrawServlet">
+<form method="post" action="downloadStatServlet">
     
-<p style="text-align: center;">Customer ID :<input maxlength="30" name="custID" size="30" type="text" value="" ></p>
+<p style="text-align: center;">Customer ID : <input maxlength="30" name="custID" size="30" type="text" value="" ></p>
 
-<p style="text-align: center;">Amount to be withdrawn :<input maxlength="50" name="withdrawAmount" size="30" type ="text" value=""></p>
-
-<p style="text-align: center;"><input name="submit" type="submit" value="Withdraw" /></p>
+<p style="text-align: center;"><input name="submit" type="submit" value="Get Statement" /></p>
 </form>     
         </div>
     

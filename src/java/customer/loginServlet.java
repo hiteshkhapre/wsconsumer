@@ -75,6 +75,11 @@ public class loginServlet extends HttpServlet {
                 session.setAttribute("CustID", custProfile.getCustID());
                  session.setAttribute("FirstName", custProfile.getCustFirstname());
                  session.setAttribute("AccountNumber", account.getAccountNumber());
+                 session.setAttribute("LastName", custProfile.getCustLastname());
+                 session.setAttribute("AddressLine1", custProfile.getCustAddressline1());
+                 session.setAttribute("AddressLine2", custProfile.getCustAddressline2());
+                 session.setAttribute("City", custProfile.getCustCity());
+                 
                 
                 if(typeOfUser.equals("customer"))
                 {
