@@ -84,7 +84,7 @@ img{
 <div id="text5" style="position:absolute; overflow:hidden; left:100px; top:292px; width:300px; height:28px; z-index:23">
 <div class="wpmd">
 <UL>
-<li><a href="adminLogin.jsp" ><font  face="Tahoma" class="ws8"><B>LOG OUT</B></font></li>
+    <li><a href="logoutServlet" ><font  face="Tahoma" class="ws8"><B>LOG OUT</B></font></a></li>
 </UL>
 <div><font face="Tahoma" class="ws8"><BR></font></div>
 </div></div>

@@ -259,6 +259,9 @@ body {
   <div class="login-help">
     <p>Forgot your password? <a href="#">Click here to reset it</a>.</p>
   </div>
+        <div>
+    <p style="text-align: center;">Are You ABC Bank Customer? <a href="index.jsp">Click here to Login</a>.</p>
+  </div>
 </div>
     
 

@@ -6,25 +6,28 @@
 package transactions;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.WebServiceRef;
-import java.io.FileOutputStream;
 import java.io.*;
-import java.util.*;
-import java.sql.*; 
+import java.util.Date;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
+import java.text.SimpleDateFormat;
+import ws.Account;
+import ws.CustomerWebService_Service;
+
 
 /**
  *
  * @author hiteshkhapre
  */
 public class downloadStatServlet extends HttpServlet {
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/wsRate/CustomerWebService.wsdl")
+    private CustomerWebService_Service service_1;
     @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/wsRate/TransactionWebService.wsdl")
     private TransactionWebService_Service service;
 
@@ -40,30 +43,76 @@ public class downloadStatServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try (OutputStream os = response.getOutputStream()) {
           
             int custID = Integer.valueOf(request.getParameter("custID").toString());
-            int accountNumber = Integer.valueOf(request.getSession().getAttribute("AccountNumber").toString());
             
-            ArrayList<Transactions> transactionList = (ArrayList) getTransactions(4);
+            Account account = getAccountDetails(custID);
+            
+            
+            int accountNumber = account.getAccountNumber();//Integer.valueOf(request.getSession().getAttribute("AccountNumber").toString());
+            String accountStatus = account.getAccountStatus();
+            String accountType = account.getAccountType();
+            Double accountBalance = account.getAccountBalance();
+            
+            SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+            Date date = new Date();
+            // System.out.println(format.format(date)); //2014/08/06 15:59:48
+            
+            
+            String firstName = request.getSession().getAttribute("FirstName").toString();
+            String lastName = request.getSession().getAttribute("LastName").toString();
+            
+            
+            List<Transactions> transactionList = getTransactions(accountNumber);
+           
             
             try
             {
                 /*Initialize PDF documents - logical objects */
                 Document pdf_stat = new Document();
-                PdfWriter.getInstance(pdf_stat, new FileOutputStream("statement.pdf"));
-                pdf_stat.open();            
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                PdfWriter.getInstance(pdf_stat, baos);
+                pdf_stat.open();  
+                
+                pdf_stat.addTitle("Statement for Account");
+               // pdf_stat.add(new Paragraph("Statment of Account", Font.getFamily("BOLD")));
+                 pdf_stat.add(new Paragraph(String.format("                                                             Statement Of Account ")));
+                 pdf_stat.add(new Paragraph(String.format(" ")));
+                 pdf_stat.add(new Paragraph(String.format(" ")));
+                 pdf_stat.add(new Paragraph(String.format(" ")));
+                pdf_stat.add(new Paragraph(String.format("Customer ID: %s", custID)));
+                pdf_stat.add(new Paragraph(String.format("Name: %s %s", firstName,lastName)));
+                pdf_stat.add(new Paragraph(String.format("Account Number: %s", accountNumber)));
+                pdf_stat.add(new Paragraph(String.format("Account Type: %s", accountType)));
+                pdf_stat.add(new Paragraph(String.format("Account Status: %s", accountStatus)));
+                pdf_stat.add(new Paragraph(String.format("Account Balance as on %s : %s", format.format(date),accountBalance)));
+                pdf_stat.add(new Paragraph(String.format(" ")));
+                
+                
                 //we have ** columns in our table
-                PdfPTable pdf_Table = new PdfPTable(5);
+                PdfPTable pdf_Table = new PdfPTable(4);
                 //create a cell object
                 PdfPCell table_cell;
                 
+                 table_cell = new PdfPCell(new Phrase("TransactionID"));
+                    pdf_Table.addCell(table_cell);
+                    // table_cell = new PdfPCell(new Phrase("AccountNumber"));
+                    //  pdf_Table.addCell(table_cell);
+                    table_cell = new PdfPCell(new Phrase("TransactionType"));
+                    pdf_Table.addCell(table_cell);
+                    table_cell = new PdfPCell(new Phrase("TimeStamp"));
+                    pdf_Table.addCell(table_cell);
+                    table_cell = new PdfPCell(new Phrase("Trans Amount"));
+                    pdf_Table.addCell(table_cell);
+                
+                
                 for(Transactions trans : transactionList)
                 {
-                    table_cell = new PdfPCell(new Phrase(trans.getTransactionID()));
+                    table_cell = new PdfPCell(new Phrase(String.valueOf(trans.getTransactionID())));
                     pdf_Table.addCell(table_cell);
-                     table_cell = new PdfPCell(new Phrase(accountNumber));
-                      pdf_Table.addCell(table_cell);
+                    // table_cell = new PdfPCell(new Phrase(String.valueOf(accountNumber)));
+                    //  pdf_Table.addCell(table_cell);
                     table_cell = new PdfPCell(new Phrase(trans.getTransactionType()));
                     pdf_Table.addCell(table_cell);
                     table_cell = new PdfPCell(new Phrase(trans.getDateTime().toString()));
@@ -72,12 +121,31 @@ public class downloadStatServlet extends HttpServlet {
                     pdf_Table.addCell(table_cell);
                     
                 }
+                //pdf_stat.add(new Paragraph(String.format("Account Balance: %s", accountNumber)));
+                
+                pdf_stat.add(new Paragraph(String.format("Statement: ")));
+                pdf_stat.add(new Paragraph(String.format(" ")));
                    /* Attach report table to PDF */
                 pdf_stat.add(pdf_Table); 
                 //pdf_stat.open();
                 pdf_stat.close();
-                              
-                response.sendRedirect("statement.pdf");
+                
+                // setting some response headers
+            response.setHeader("Expires", "0");
+            response.setHeader("Cache-Control",
+                "must-revalidate, post-check=0, pre-check=0");
+            response.setHeader("Pragma", "public");
+            // setting the content type
+            response.setContentType("application/pdf");
+            // the contentlength
+            response.setContentLength(baos.size());
+            // write ByteArrayOutputStream to the ServletOutputStream
+            //OutputStream os = response.getOutputStream();
+            baos.writeTo(os);
+            os.flush();
+            os.close();
+                
+              //  response.sendRedirect("statement.pdf");
             }catch(Exception e)
             {
                 e.printStackTrace();
@@ -99,6 +167,11 @@ public class downloadStatServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+        
+        
+        
+        
     }
 
     /**
@@ -130,6 +203,13 @@ public class downloadStatServlet extends HttpServlet {
         // If the calling of port operations may lead to race condition some synchronization is required.
         transactions.TransactionWebService port = service.getTransactionWebServicePort();
         return port.getTransactions(accountNumber);
+    }
+
+    private Account getAccountDetails(int custID) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ws.CustomerWebService port = service_1.getCustomerWebServicePort();
+        return port.getAccountDetails(custID);
     }
 
 }
