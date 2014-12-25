@@ -31,16 +31,29 @@ public class logoutServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet logoutServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet logoutServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+           // request.getRequestDispatcher("link.html").include(request, response);  
+            String userType = request.getSession().getAttribute("UserType").toString();
+            String msg = "You are logged out successfully!";
+            request.getSession().invalidate();  
+            
+            if(userType.equals("customer"))
+            {
+            out.println("<script type=\"text/javascript\">");  
+             out.println("alert(\"" +msg+ "\")");
+             out.println("location='index.jsp';");
+            out.println("</script>");
+            }
+            else
+            {
+                out.println("<script type=\"text/javascript\">");  
+            out.println("alert('You are logged out successfully!');");  
+             out.println("location='adminLogin.jsp';");
+            out.println("</script>");
+            }      
+            
+            //out.print("You are successfully logged out!");  
+              
+            //out.close();  
         }
     }
 

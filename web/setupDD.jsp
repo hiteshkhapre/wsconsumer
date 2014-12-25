@@ -38,7 +38,7 @@ img{
     <body>
         <img src="images/abclogo.jpg" alt="ABC Bank Logo" style="width:216px;height:68px">
         <h1 align="center">Welcome to ABC Bank</h1>
-               <p align="center"><font color = "red">Welcome Mr. <%=session.getAttribute("FirstName")%> logged in as <%=session.getAttribute("UserType")%></font></p>
+        <p align="center"><font color = "red">Welcome Mr. <%=session.getAttribute("FirstName")%> logged in as <%=session.getAttribute("UserType")%></font></p>
 <p align="center"><font color = "red">Customer ID is <%=session.getAttribute("CustID")%></font></p>
     
     <div id="text9" style="position:absolute; overflow:hidden; left:100px; top:168px; width:300px; height:28px; z-index:18">
@@ -46,13 +46,14 @@ img{
 <UL>
     <li><a href="profileServlet"><font face="Tahoma" class="ws8"><B>MY PROFILE</B></font></a></li>
 </UL>
-<div><font color="#808080" face="Tahoma" class="ws8"><BR></font></div>
+    <div><font color="#808080" face="Tahoma" class="ws8"><BR></font></div>
 </div></div>
 
-<div id="text10" style="position:absolute; overflow:hidden; left:100px; top:194px; width:300px; height:28px; z-index:19">
+
+    <div id="text10" style="position:absolute; overflow:hidden; left:100px; top:194px; width:300px; height:28px; z-index:19">
 <div class="wpmd">
 <UL>
-<li><a href="AccountServlet" ><font face="Tahoma" class="ws8"><B>MY ACCOUNT DETAILS</B></font></a></li>
+<li><a href="AccountServlet"><font face="Tahoma" class="ws8"><B>MY ACCOUNT DETAILS</B></font></a></li>
 </UL>
 <div><font color="#808080" face="Tahoma" class="ws8"><BR></font></div>
 </div></div>
@@ -89,6 +90,7 @@ img{
 <div><font color="#808080" face="Tahoma" class="ws8"><BR></font></div>
 </div></div>
 
+
 <div id="text5" style="position:absolute; overflow:hidden; left:100px; top:317px; width:300px; height:28px; z-index:23">
 <div class="wpmd">
 <UL>
@@ -96,35 +98,22 @@ img{
 </UL>
 <div><font face="Tahoma" class="ws8"><BR></font></div>
 </div></div>
+ 
+ <div style="position:absolute; overflow:hidden; left:350px; top:180px; width:500px; height:auto; z-index:1">
+            <p style="text-align: center;"><b>Setup Direct Debit</b></p>
     
+<form method="post" action="ddServlet">
+    
+<p style="text-align: center;">Username :<input maxlength="30" name="username" size="30" type="text" value="" ></p>
 
-        <div style="position:absolute; overflow:hidden; left:350px; top:180px; width:600px; height:auto; z-index:1">
-                <form name="form1" method="POST">
-                    <p><label for="textfield">Customer ID:</label><%=session.getAttribute("CustID")%></p>
-                                    
-                <p><label for="textfield2">First Name:</label><%=session.getAttribute("FirstName")%></p>
-                
-                
-                <p><label for="textfield3">Last Name:</label><%=session.getAttribute("LastName")%></p>
-               
-                
-                <p><label for="textfield4">Address Line 1:</label><%=session.getAttribute("AddressLine1")%></p>
-               
-                
-                <p><label for="textfield5">Address Line 2:</label><%=session.getAttribute("AddressLine2")%></p>
-                
-               
-                <p><label for="City:">City:</label><%=session.getAttribute("City")%></p>
-               
-                
-                <p><label for="Contact">Contact Number:</label><%=session.getAttribute("ContactNumber")%></p>
-               
-                <p><label for="Email:">Email:</label><%=session.getAttribute("Email")%></p>
-               
-                </form>
+
+
+<p style="text-align: center;">Initial Amount :<input maxlength="50" name="intialamount" size="30" type ="text" value=""></p>
+
+<p style="text-align: center;"><input name="submit" type="submit" value="Setup Direct Debit" /></p>
+</form>     
         </div>
-                
-              
+
     
 </body>
 </html>
