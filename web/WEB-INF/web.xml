@@ -40,6 +40,10 @@
         <servlet-name>logoutServlet</servlet-name>
         <servlet-class>customer.logoutServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ddServlet</servlet-name>
+        <servlet-class>customer.ddServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>logoutServlet</servlet-name>
         <url-pattern>/logoutServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ddServlet</servlet-name>
+        <url-pattern>/ddServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

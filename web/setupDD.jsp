@@ -10,7 +10,19 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Welcome Page</title>
-        <style type="text/css">
+       <!--  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" type="text/css" media="all" />
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
+ <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script> 
+<script type="text/javascript">
+$(function () {
+$('#scheduledate').datepicker({ dateFormat: 'yy-mm-dd' });
+$('#scheduledate').datepicker();
+});
+</script>
+    <style>
+.ui-datepicker th { background-color: #CCCCFF; }
+</style>-->
+     <style type="text/css">
     .title {
         color: blue;
         text-decoration: bold;
@@ -104,16 +116,14 @@ img{
     
 <form method="post" action="ddServlet">
     
-<p style="text-align: center;">Username :<input maxlength="30" name="username" size="30" type="text" value="" ></p>
+<p style="text-align: center;">Account Number : <input maxlength="30" name="accountNumber" size="30" type="text" value="" ></p>
 
-
-
-<p style="text-align: center;">Initial Amount :<input maxlength="50" name="intialamount" size="30" type ="text" value=""></p>
+<p style="text-align: center;">Amount to be debited : <input maxlength="50" name="amount" size="30" type ="text" value=""></p>
+<p style="text-align: center;">
+ Select next schedule Date :
+ <input type="date" value="" name="scheduledate"/></p>
 
 <p style="text-align: center;"><input name="submit" type="submit" value="Setup Direct Debit" /></p>
 </form>     
-        </div>
-
-    
-</body>
+ </div>
 </html>
