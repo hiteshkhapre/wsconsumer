@@ -5,11 +5,13 @@
  */
 package customer;
 
+import customer.DirectDebitWebService_Service;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
@@ -18,12 +20,17 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.ws.WebServiceRef;
 
 /**
  *
  * @author hiteshkhapre
  */
 public class ddServlet extends HttpServlet {
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/wsRate/DirectDebitWebService.wsdl")
+    private DirectDebitWebService_Service service;
 
     private int accountNumber;
     private double amount;
@@ -60,23 +67,44 @@ public class ddServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
            
-            accountNumber = Integer.valueOf(request.getParameter("accountNumber").toString());
-            amount = Double.valueOf(request.getParameter("amount").toString());
+            accountNumber = Integer.valueOf(request.getParameter("accountNumber"));
+            amount = Double.valueOf(request.getParameter("amount"));
             custID = Integer.valueOf(request.getSession().getAttribute("CustID").toString());
             
-            String dateString = request.getParameter("scheduledate").toString();
-           DateFormat format = new SimpleDateFormat("DD MM yyyy");//yyyy-MM-dd
+            String dateString = request.getParameter("scheduledate");
+           DateFormat format = new SimpleDateFormat("yyyy-MM-dd");//yyyy-MM-dd
            Date date = format.parse(dateString);
-            
+           
+           GregorianCalendar gregory = new GregorianCalendar();
+            gregory.setTime(date);
+           
+           XMLGregorianCalendar calendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(gregory);
+           
             //call insertDDData operation and insert the data into the DB
+           String successString = insertDDData(accountNumber,amount,calendar);
            
-           
-           //Start the time on the reciept of successful insertion of data.
-           
-           
-            Timer timer = new Timer();
-            TimerTask ddTimerTask = new DirectDebitTask();
-            timer.scheduleAtFixedRate(ddTimerTask, 0, 600000);
+           String msg = "Direct Debit instruction Successful.";
+                    
+            //Start the time on the reciept of successful insertion of data.
+           if(successString.equals("Inserted"))
+           {
+             //  Timer timer = new Timer();
+           // TimerTask ddTimerTask = new DirectDebitTask();
+           // timer.scheduleAtFixedRate(ddTimerTask, 0, 600000);
+            
+             out.println("<script type=\"text/javascript\">");  
+             out.println("alert(\"" +msg+ "\")");
+             out.println("location='setupDD.jsp';");
+            out.println("</script>");
+            
+           }else
+           {
+               out.println("<script type=\"text/javascript\">");  
+            out.println("alert('Direct Debit instruction unsuccessful due to some problems. Please try again.');");  
+             out.println("location='setupDD.jsp';");
+            out.println("</script>");
+           }
+          
            // timer.schedule(ddTimerTask, date);
             
             
@@ -124,4 +152,12 @@ public class ddServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private String insertDDData(int accountNumber, double amount, javax.xml.datatype.XMLGregorianCalendar date) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        customer.DirectDebitWebService port = service.getDirectDebitWebServicePort();
+        return port.insertDDData(accountNumber, amount, date);
+    }
+
+  
 }

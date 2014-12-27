@@ -82,13 +82,12 @@ img{
 </div></div>
     
         <div style="position:absolute; overflow:hidden; left:350px; top:180px; width:500px; height:auto; z-index:1">
-            <p style="text-align: center;"><b>Add Customer to ABC Bank</b></p>
+            <p style="text-align: center;"><b>Update Customer Details</b></p>    
+            <p style="text-align: center;">(Please enter customer ID and fields to be updated)</p>
+            
+<form method="post" action="updateCustomerServlet">
     
-<form method="post" action="addCustomerServlet">
-    
-<p style="text-align: center;">Username :<input maxlength="30" name="username" size="30" type="text" value="" ></p>
-
-<p style="text-align: center;">Password :<input maxlength="50" name="password" size="30" type="password" value=""></p>
+<p style="text-align: center;">Customer ID (required field):<input maxlength="30" name="custID" size="30" type="text" value="" ></p>
 
 <p style="text-align: center;">First Name :<input maxlength="50" name="firstname" size="30" type="text" value=""></p>
 
@@ -104,15 +103,8 @@ img{
 
 <p style="text-align: center;">Email :<input maxlength="50" name="email" size="30" type="text" value=""></p>
 
-<p style="text-align: center;">Account Type :<select name="accounttype" size=1> 
-<option>Current
-<option>Saving
-    </select>
-</p>
 
-<p style="text-align: center;">Initial Amount :<input maxlength="50" name="intialamount" size="30" type ="text" value=""></p>
-
-<p style="text-align: center;"><input name="submit" type="submit" value="Register" /></p>
+<p style="text-align: center;"><input name="submit" type="submit" value="Update" /></p>
 </form>     
         </div>
     

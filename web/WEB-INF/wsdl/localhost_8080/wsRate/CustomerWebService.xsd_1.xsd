@@ -109,6 +109,7 @@
 <xs:element name="accountNumber" type="xs:int"/>
 <xs:element name="accountStatus" type="xs:string" minOccurs="0"/>
 <xs:element name="accountType" type="xs:string" minOccurs="0"/>
+<xs:element name="custID" type="xs:int"/>
 <xs:element name="cust_Addressline1" type="xs:string" minOccurs="0"/>
 <xs:element name="cust_Addressline2" type="xs:string" minOccurs="0"/>
 <xs:element name="cust_City" type="xs:string" minOccurs="0"/>
