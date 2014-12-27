@@ -4,17 +4,23 @@
 <xsd:import namespace="http://transaction/" schemaLocation="http://localhost:8080/wsRate/DirectDebitWebService?xsd=1"/>
 </xsd:schema>
 </types>
+<message name="getDirectDebitDetails">
+<part name="parameters" element="tns:getDirectDebitDetails"/>
+</message>
+<message name="getDirectDebitDetailsResponse">
+<part name="parameters" element="tns:getDirectDebitDetailsResponse"/>
+</message>
+<message name="directDebitScheduledOperation">
+<part name="parameters" element="tns:directDebitScheduledOperation"/>
+</message>
+<message name="directDebitScheduledOperationResponse">
+<part name="parameters" element="tns:directDebitScheduledOperationResponse"/>
+</message>
 <message name="insertDDData">
 <part name="parameters" element="tns:insertDDData"/>
 </message>
 <message name="insertDDDataResponse">
 <part name="parameters" element="tns:insertDDDataResponse"/>
-</message>
-<message name="directDebit">
-<part name="parameters" element="tns:directDebit"/>
-</message>
-<message name="directDebitResponse">
-<part name="parameters" element="tns:directDebitResponse"/>
 </message>
 <message name="getAccountDetails">
 <part name="parameters" element="tns:getAccountDetails"/>
@@ -23,13 +29,17 @@
 <part name="parameters" element="tns:getAccountDetailsResponse"/>
 </message>
 <portType name="DirectDebitWebService">
+<operation name="getDirectDebitDetails">
+<input wsam:Action="http://transaction/DirectDebitWebService/getDirectDebitDetailsRequest" message="tns:getDirectDebitDetails"/>
+<output wsam:Action="http://transaction/DirectDebitWebService/getDirectDebitDetailsResponse" message="tns:getDirectDebitDetailsResponse"/>
+</operation>
+<operation name="directDebitScheduledOperation">
+<input wsam:Action="http://transaction/DirectDebitWebService/directDebitScheduledOperationRequest" message="tns:directDebitScheduledOperation"/>
+<output wsam:Action="http://transaction/DirectDebitWebService/directDebitScheduledOperationResponse" message="tns:directDebitScheduledOperationResponse"/>
+</operation>
 <operation name="insertDDData">
 <input wsam:Action="http://transaction/DirectDebitWebService/insertDDDataRequest" message="tns:insertDDData"/>
 <output wsam:Action="http://transaction/DirectDebitWebService/insertDDDataResponse" message="tns:insertDDDataResponse"/>
-</operation>
-<operation name="directDebit">
-<input wsam:Action="http://transaction/DirectDebitWebService/directDebitRequest" message="tns:directDebit"/>
-<output wsam:Action="http://transaction/DirectDebitWebService/directDebitResponse" message="tns:directDebitResponse"/>
 </operation>
 <operation name="getAccountDetails">
 <input wsam:Action="http://transaction/DirectDebitWebService/getAccountDetailsRequest" message="tns:getAccountDetails"/>
@@ -38,7 +48,7 @@
 </portType>
 <binding name="DirectDebitWebServicePortBinding" type="tns:DirectDebitWebService">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="insertDDData">
+<operation name="getDirectDebitDetails">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -47,7 +57,16 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="directDebit">
+<operation name="directDebitScheduledOperation">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="insertDDData">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

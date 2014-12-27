@@ -52,7 +52,7 @@ img{
 <div id="text10" style="position:absolute; overflow:hidden; left:100px; top:194px; width:300px; height:28px; z-index:19">
 <div class="wpmd">
 <UL>
-<li><a href="Jobseeker-DownloadCV.htm" ><font face="Tahoma" class="ws8"><B>UPDATE CUSTOMER DETAILS</B></font></a></li>
+<li><a href="updateCustomerForm.jsp" ><font face="Tahoma" class="ws8"><B>UPDATE CUSTOMER DETAILS</B></font></a></li>
 </UL>
 <div><font color="#808080" face="Tahoma" class="ws8"><BR></font></div>
 </div></div>

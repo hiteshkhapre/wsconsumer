@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Timer;
@@ -35,21 +36,40 @@ public class ddServlet extends HttpServlet {
     private int accountNumber;
     private double amount;
     private int custID;
-    
+    private final static long fONCE_PER_DAY = 1000*60*60*24;
+
+  private final static int fONE_DAY = 1;
+  private final static int fFOUR_AM = 4;
+  private final static int fZERO_MINUTES = 0;
+  
+  private static Date getTomorrowMorning4am(){
+    Calendar tomorrow = new GregorianCalendar();
+    tomorrow.add(Calendar.DATE, fONE_DAY);
+    Calendar result = new GregorianCalendar(
+      tomorrow.get(Calendar.YEAR),
+      tomorrow.get(Calendar.MONTH),
+      tomorrow.get(Calendar.DATE),
+      fFOUR_AM,
+      fZERO_MINUTES
+    );
+    return result.getTime();
+  }
     public class DirectDebitTask extends TimerTask
 {
 
     public void run()
     {
-        debitDDAmount();
+        if(getDirectDebitDetails(accountNumber) != 0)
+        {
+            debitDDAmount();
+        }
     }
 }
     
     
     protected void debitDDAmount(){
         //call directdebit operation
-        
-        
+        String successString = directDebitScheduledOperation(accountNumber, amount, custID);
     }
     
     
@@ -77,6 +97,8 @@ public class ddServlet extends HttpServlet {
            
            GregorianCalendar gregory = new GregorianCalendar();
             gregory.setTime(date);
+            
+            
            
            XMLGregorianCalendar calendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(gregory);
            
@@ -88,13 +110,13 @@ public class ddServlet extends HttpServlet {
             //Start the time on the reciept of successful insertion of data.
            if(successString.equals("Inserted"))
            {
-             //  Timer timer = new Timer();
-           // TimerTask ddTimerTask = new DirectDebitTask();
-           // timer.scheduleAtFixedRate(ddTimerTask, 0, 600000);
+            Timer timer = new Timer();
+            TimerTask ddTimerTask = new DirectDebitTask();
+            timer.scheduleAtFixedRate(ddTimerTask, date, fONCE_PER_DAY);
             
-             out.println("<script type=\"text/javascript\">");  
-             out.println("alert(\"" +msg+ "\")");
-             out.println("location='setupDD.jsp';");
+            out.println("<script type=\"text/javascript\">");  
+            out.println("alert(\"" +msg+ "\")");
+            out.println("location='setupDD.jsp';");
             out.println("</script>");
             
            }else
@@ -157,6 +179,20 @@ public class ddServlet extends HttpServlet {
         // If the calling of port operations may lead to race condition some synchronization is required.
         customer.DirectDebitWebService port = service.getDirectDebitWebServicePort();
         return port.insertDDData(accountNumber, amount, date);
+    }
+
+    private String directDebitScheduledOperation(int accountNumber, double amount, int custID) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        customer.DirectDebitWebService port = service.getDirectDebitWebServicePort();
+        return port.directDebitScheduledOperation(accountNumber, amount, custID);
+    }
+
+    private Integer getDirectDebitDetails(int accountNumber) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        customer.DirectDebitWebService port = service.getDirectDebitWebServicePort();
+        return port.getDirectDebitDetails(accountNumber);
     }
 
   
