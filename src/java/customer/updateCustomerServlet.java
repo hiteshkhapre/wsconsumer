@@ -11,13 +11,17 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.ws.WebServiceRef;
 import ws.CustomerProfile;
+import ws.CustomerWebService_Service;
 
 /**
  *
  * @author hiteshkhapre
  */
 public class updateCustomerServlet extends HttpServlet {
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/wsRate/CustomerWebService.wsdl")
+    private CustomerWebService_Service service;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,7 +39,7 @@ public class updateCustomerServlet extends HttpServlet {
         
         try (PrintWriter out = response.getWriter()) {
            
-            int custID = Integer.valueOf(request.getParameter("CustID"));
+            int custID = Integer.valueOf(request.getParameter("custID"));
             String firstname = request.getParameter("firstname");
             String lastname = request.getParameter("lastname");
             String addressline1 = request.getParameter("addressline1");
@@ -54,7 +58,7 @@ public class updateCustomerServlet extends HttpServlet {
             customerProfile.setCustContactnumber(contactnumber);
             customerProfile.setCustEmail(email);
             
-            String successString = "";// addCustomer(customerProfile);
+            String successString = updateCustomer(customerProfile);
             
             if(successString.equals("Updated"))
             {
@@ -114,5 +118,12 @@ public class updateCustomerServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private String updateCustomer(ws.CustomerProfile customerDetails) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ws.CustomerWebService port = service.getCustomerWebServicePort();
+        return port.updateCustomer(customerDetails);
+    }
 
 }

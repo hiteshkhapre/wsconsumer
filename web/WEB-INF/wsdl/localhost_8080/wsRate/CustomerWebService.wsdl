@@ -10,6 +10,12 @@
 <message name="getAccountDetailsResponse">
 <part name="parameters" element="tns:getAccountDetailsResponse"/>
 </message>
+<message name="getMyProfile">
+<part name="parameters" element="tns:getMyProfile"/>
+</message>
+<message name="getMyProfileResponse">
+<part name="parameters" element="tns:getMyProfileResponse"/>
+</message>
 <message name="addCustomer">
 <part name="parameters" element="tns:addCustomer"/>
 </message>
@@ -37,16 +43,20 @@
 <message name="deleteCustomerResponse">
 <part name="parameters" element="tns:deleteCustomerResponse"/>
 </message>
-<message name="getMyProfile">
-<part name="parameters" element="tns:getMyProfile"/>
+<message name="updateCustomer">
+<part name="parameters" element="tns:updateCustomer"/>
 </message>
-<message name="getMyProfileResponse">
-<part name="parameters" element="tns:getMyProfileResponse"/>
+<message name="updateCustomerResponse">
+<part name="parameters" element="tns:updateCustomerResponse"/>
 </message>
 <portType name="CustomerWebService">
 <operation name="getAccountDetails">
 <input wsam:Action="http://ws/CustomerWebService/getAccountDetailsRequest" message="tns:getAccountDetails"/>
 <output wsam:Action="http://ws/CustomerWebService/getAccountDetailsResponse" message="tns:getAccountDetailsResponse"/>
+</operation>
+<operation name="getMyProfile">
+<input wsam:Action="http://ws/CustomerWebService/getMyProfileRequest" message="tns:getMyProfile"/>
+<output wsam:Action="http://ws/CustomerWebService/getMyProfileResponse" message="tns:getMyProfileResponse"/>
 </operation>
 <operation name="addCustomer">
 <input wsam:Action="http://ws/CustomerWebService/addCustomerRequest" message="tns:addCustomer"/>
@@ -65,14 +75,23 @@
 <input wsam:Action="http://ws/CustomerWebService/deleteCustomerRequest" message="tns:deleteCustomer"/>
 <output wsam:Action="http://ws/CustomerWebService/deleteCustomerResponse" message="tns:deleteCustomerResponse"/>
 </operation>
-<operation name="getMyProfile">
-<input wsam:Action="http://ws/CustomerWebService/getMyProfileRequest" message="tns:getMyProfile"/>
-<output wsam:Action="http://ws/CustomerWebService/getMyProfileResponse" message="tns:getMyProfileResponse"/>
+<operation name="updateCustomer">
+<input wsam:Action="http://ws/CustomerWebService/updateCustomerRequest" message="tns:updateCustomer"/>
+<output wsam:Action="http://ws/CustomerWebService/updateCustomerResponse" message="tns:updateCustomerResponse"/>
 </operation>
 </portType>
 <binding name="CustomerWebServicePortBinding" type="tns:CustomerWebService">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
 <operation name="getAccountDetails">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="getMyProfile">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -120,7 +139,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="getMyProfile">
+<operation name="updateCustomer">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

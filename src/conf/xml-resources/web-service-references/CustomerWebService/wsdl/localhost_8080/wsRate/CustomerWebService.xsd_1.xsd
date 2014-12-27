@@ -26,6 +26,10 @@
 
 <xs:element name="insertOperationResponse" type="tns:insertOperationResponse"/>
 
+<xs:element name="updateCustomer" type="tns:updateCustomer"/>
+
+<xs:element name="updateCustomerResponse" type="tns:updateCustomerResponse"/>
+
 <xs:complexType name="insertOperation">
 <xs:sequence>
 <xs:element name="username" type="xs:string" minOccurs="0"/>
@@ -137,6 +141,18 @@
 <xs:complexType name="getMyProfileResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:customerProfile" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateCustomer">
+<xs:sequence>
+<xs:element name="customerDetails" type="tns:customerProfile" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateCustomerResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
