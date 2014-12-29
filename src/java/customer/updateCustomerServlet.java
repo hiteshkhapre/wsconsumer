@@ -68,14 +68,21 @@ public class updateCustomerServlet extends HttpServlet {
             out.println("</script>");
            // response.sendRedirect("Welcome_Admin.jsp");
             }
-            else
+            else if(successString.equals("No Customer Found."))
             {
                 out.println("<script type=\"text/javascript\">");  
-            out.println("alert('Customer Details were not updated due to some problems. Please try again.');");  
-             //out.println("location='Welcome_Admin.jsp';");
+            out.println("alert('No Customer found with the entered customer ID. Please try again.');");  
+             out.println("location='updateCustomerForm.jsp';");
             out.println("</script>");
            // response.sendRedirect("Welcome_Admin.jsp");
-            }  
+            } else
+            {
+                  out.println("<script type=\"text/javascript\">");  
+            out.println("alert('Customer Details were not updated due to some problems. Please try again.');");  
+             out.println("location='updateCustomerForm.jsp';");
+            out.println("</script>");
+           // response.sendRedirect("Welcome_Admin.jsp");
+            }
             
         }
     }

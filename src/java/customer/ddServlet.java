@@ -112,7 +112,7 @@ public class ddServlet extends HttpServlet {
            {
             Timer timer = new Timer();
             TimerTask ddTimerTask = new DirectDebitTask();
-            timer.scheduleAtFixedRate(ddTimerTask, 1200000, 600000);
+            timer.scheduleAtFixedRate(ddTimerTask, date, fONCE_PER_DAY);
             
             out.println("<script type=\"text/javascript\">");  
             out.println("alert(\"" +msg+ "\")");

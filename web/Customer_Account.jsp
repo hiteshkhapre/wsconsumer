@@ -98,21 +98,25 @@ img{
 <div><font face="Tahoma" class="ws8"><BR></font></div>
 </div></div>
     
+<div style="position:absolute; overflow:hidden; left:300px; top:180px; width:600px; height:auto; z-index:1">
+        <p style="text-align: center;"><b><u>Customer Account Details</u></b></p>  
+     </div>
 
-        <div style="position:absolute; overflow:hidden; left:350px; top:180px; width:600px; height:auto; z-index:1">
+        <div style="position:absolute; overflow:hidden; left:500px; top:220px; width:600px; height:auto; z-index:1">
+            
                 <form name="form1" method="POST">
                     
-                     <p><label for="textfield5">Customer ID:</label><%=session.getAttribute("CustID")%></p>
+                     <p><b><label for="textfield5">Customer ID:</label></b><%=session.getAttribute("CustID")%></p>
                 
-                    <p><label for="textfield">Account Number:</label><%=session.getAttribute("AccountNumber")%></p>
+                    <p><b><label for="textfield">Account Number:</label></b><%=session.getAttribute("AccountNumber")%></p>
                                     
-                <p><label for="textfield2">Account Type:</label><%=session.getAttribute("AccountType")%></p>
+                <p><b><label for="textfield2">Account Type:</label></b><%=session.getAttribute("AccountType")%></p>
                 
                 
-                <p><label for="textfield3">Account Balance (£) :</label><%=session.getAttribute("AccountBalance")%></p>
+                <p><b><label for="textfield3">Account Balance (£) :</label></b><%=session.getAttribute("AccountBalance")%></p>
                
                 
-                <p><label for="textfield4">Account Status:</label><%=session.getAttribute("AccountStatus")%></p>
+                <p><b><label for="textfield4">Account Status:</label></b><%=session.getAttribute("AccountStatus")%></p>
                
                 
                

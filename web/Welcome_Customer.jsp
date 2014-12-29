@@ -33,6 +33,9 @@ img{
     vertical-align: middle
 }
 
+.wpmd.ws8 {
+    list-style-image: url('sqpurple.gif');
+}
     </style>
     </head>
     <body>

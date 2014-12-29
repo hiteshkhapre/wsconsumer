@@ -96,30 +96,33 @@ img{
 </UL>
 <div><font face="Tahoma" class="ws8"><BR></font></div>
 </div></div>
-    
-
-        <div style="position:absolute; overflow:hidden; left:350px; top:180px; width:600px; height:auto; z-index:1">
+     <div style="position:absolute; overflow:hidden; left:300px; top:180px; width:600px; height:auto; z-index:1">
+         <p style="text-align: center;"><b><u>Customer Personal Details</u></b></p>  
+     </div>
+        <div style="position:absolute; overflow:hidden; left:500px; top:220px; width:600px; height:auto; z-index:1">
+            
+             
                 <form name="form1" method="POST">
-                    <p><label for="textfield">Customer ID:</label><%=session.getAttribute("CustID")%></p>
+                    <p><b><label for="textfield">Customer ID:</label></b><%=session.getAttribute("CustID")%></p>
                                     
-                <p><label for="textfield2">First Name:</label><%=session.getAttribute("FirstName")%></p>
+                <p><b><label for="textfield2">First Name:</label></b><%=session.getAttribute("FirstName")%></p>
                 
                 
-                <p><label for="textfield3">Last Name:</label><%=session.getAttribute("LastName")%></p>
+                <p><b><label for="textfield3">Last Name:</label></b><%=session.getAttribute("LastName")%></p>
                
                 
-                <p><label for="textfield4">Address Line 1:</label><%=session.getAttribute("AddressLine1")%></p>
+                <p><b><label for="textfield4">Address Line 1:</label></b><%=session.getAttribute("AddressLine1")%></p>
                
                 
-                <p><label for="textfield5">Address Line 2:</label><%=session.getAttribute("AddressLine2")%></p>
+                <p><b><label for="textfield5">Address Line 2:</label></b><%=session.getAttribute("AddressLine2")%></p>
                 
                
-                <p><label for="City:">City:</label><%=session.getAttribute("City")%></p>
+                <p><b><label for="City:">City:</label></b><%=session.getAttribute("City")%></p>
                
                 
-                <p><label for="Contact">Contact Number:</label><%=session.getAttribute("ContactNumber")%></p>
+                <p><b><label for="Contact">Contact Number:</label></b><%=session.getAttribute("ContactNumber")%></p>
                
-                <p><label for="Email:">Email:</label><%=session.getAttribute("Email")%></p>
+                <p><b><label for="Email:">Email:</label></b><%=session.getAttribute("Email")%></p>
                
                 </form>
         </div>

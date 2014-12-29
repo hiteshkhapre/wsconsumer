@@ -50,9 +50,15 @@ public class deleteCustomerServlet extends HttpServlet {
             out.println("alert('Customer details are deleted Successfully');");
              out.println("location='deleteCustomerForm.jsp';");
             out.println("</script>");
-                }else
+                }else if(successString.equals("No Customer Found."))
                 {
                     out.println("<script type=\"text/javascript\">");  
+            out.println("alert('No Customer found with the entered customer ID. Please try again.');");
+             out.println("location='deleteCustomerForm.jsp';");
+            out.println("</script>");
+                } else
+                {
+                     out.println("<script type=\"text/javascript\">");  
             out.println("alert('Customer Details were not deleted due to some problems. Please try again.');");
              out.println("location='deleteCustomerForm.jsp';");
             out.println("</script>");
