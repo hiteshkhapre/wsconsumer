@@ -36,6 +36,13 @@ img{
 .wpmd.ws8 {
     list-style-image: url('sqpurple.gif');
 }
+.img{
+	 position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: 108px;
+    margin-top: 34px;
+}
     </style>
     </head>
     <body>
@@ -101,8 +108,10 @@ img{
 </UL>
 <div><font face="Tahoma" class="ws8"><BR></font></div>
 </div></div>
-    
-
-    
 </body>
 </html>
+
+
+
+
+
